@@ -1,6 +1,17 @@
 clear;
 clc;
 tic;
+%{
+results:
+I use depreciation rate delta =0.025, 
+finally the aggregate K = 4.9385
+see policy function in figure 2
+see wealth distribution graph in figure 3
+see lorenz curve in figure 4
+now gini index is 0.0094, compared with gini index 0.1420 in Huggett
+problem
+%}
+
 % set parameters
 alpha = 1/3;
 beta = 0.99;
@@ -158,6 +169,23 @@ plot(pol_fn(5,:),'p')
 
 
 % Wealth and Gini index
-wealth_dist = Mu.*a;
-plot(wealth_dist(1,:))
+
+Mu1 = sum(Mu,1);
+x = 1:500;
+figure(3)
+plot(x,Mu(1,:))
+hold on
+plot(x,Mu(2,:))
+hold on
+plot(x,Mu(3,:))
+hold on
+plot(x,Mu(4,:))
+hold on
+plot(x,Mu(5,:))
+title('wealth distribution')
+legend('z = state1','z = state2','z=state3','z=state4','z=state5','location','northwest')
+ginidata = [Mu1;a];
+figure(4)
+[g,~,~] = mygini(ginidata(1,:),ginidata(2,:),1)
+
 
